@@ -126,7 +126,7 @@ pipeline {
                     kubectl get deployment academic-portfolio -n ${params.K8S_NAMESPACE}
                     
                     echo "--- Application-Level HTTP Smoke Test ---"
-                    MINIKUBE_IP="192.168.49.2"
+                    MINIKUBE_IP=\$(minikube ip 2>/dev/null || echo "192.168.49.2")
                     NODE_PORT=\$(kubectl get svc academic-portfolio-service -n ${params.K8S_NAMESPACE} -o jsonpath='{.spec.ports[0].nodePort}')
                     
                     echo "[INFO] Probing http://\${MINIKUBE_IP}:\${NODE_PORT}/health ..."
