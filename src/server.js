@@ -3,7 +3,7 @@ const fs = require('fs');
 const path = require('path');
 
 const PORT = process.env.PORT || 3000;
-const APP_VERSION = process.env.APP_VERSION || '2.0.0';
+const APP_VERSION = process.env.APP_VERSION || '2.2.0';
 const ENVIRONMENT = process.env.NODE_ENV || 'production';
 
 // In-memory server startup timestamp
