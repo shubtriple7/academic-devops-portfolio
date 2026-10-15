@@ -1,0 +1,25 @@
+# Dependencies
+node_modules/
+package-lock.json
+
+# Environment and secrets - NEVER COMMIT CREDENTIALS
+.env
+*.pem
+*.key
+*.id_rsa
+*.id_ed25519
+kubeconfig
+*.tfstate
+*.tfvars
+
+# Logs and runtime artifacts
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS and Editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

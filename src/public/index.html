@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Academic DevOps Portfolio | CCA 2</title>
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="badge-row">
+                <span class="badge badge-primary">CCA 2 Assignment</span>
+                <span class="badge badge-success">Application Version: {{APP_VERSION}}</span>
+                <span class="badge badge-info">Deployment: Kubernetes on Minikube</span>
+            </div>
+            <h1 class="main-title">Cloud Computing & DevOps CI/CD Showcase</h1>
+            <p class="subtitle">Automated Continuous Integration and Deployment Pipeline Demonstration</p>
+        </header>
+
+        <section class="card pipeline-card">
+            <h2>CI/CD Pipeline Architecture Flow</h2>
+            <div class="pipeline-grid">
+                <div class="step-card">
+                    <div class="step-num">1</div>
+                    <h3>Source SCM</h3>
+                    <p>Code pushed to <strong>GitHub</strong> triggers automated webhook/polling.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-num">2</div>
+                    <h3>Build & Test</h3>
+                    <p><strong>Jenkins</strong> runs automated unit & smoke tests.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-num">3</div>
+                    <h3>Containerize</h3>
+                    <p>Multi-stage <strong>Docker</strong> image built with immutable tags.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-num">4</div>
+                    <h3>Image Registry</h3>
+                    <p>Docker image securely pushed to <strong>Docker Hub</strong>.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-num">5</div>
+                    <h3>Deploy</h3>
+                    <p>Rolling update applied to <strong>Minikube</strong> cluster via <code>kubectl</code>.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-num">6</div>
+                    <h3>Verify</h3>
+                    <p>Automated health checks & rollout verification completed.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="grid-2">
+            <div class="card">
+                <h2>Project Information</h2>
+                <ul class="info-list">
+                    <li><strong>Candidate:</strong> Rudransh (DevOps Engineering Student)</li>
+                    <li><strong>Course:</strong> Cloud Computing & DevOps (CCA 2)</li>
+                    <li><strong>Infrastructure:</strong> AWS EC2 Ubuntu Instance</li>
+                    <li><strong>Orchestrator:</strong> Minikube / Kubernetes (k8s)</li>
+                    <li><strong>Container Engine:</strong> Docker CE</li>
+                    <li><strong>CI/CD Server:</strong> Jenkins LTS</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h2>Live Kubernetes Health Check</h2>
+                <div class="health-box">
+                    <div class="status-indicator online"></div>
+                    <span id="health-status-text">Checking cluster service health...</span>
+                </div>
+                <pre class="json-display" id="health-json">{ "status": "checking..." }</pre>
+                <div class="action-row">
+                    <button class="btn" onclick="fetchHealth()">Refresh Health Probe</button>
+                    <a href="/health" target="_blank" class="btn btn-outline">Raw /health JSON</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="card demo-banner">
+            <h2>Mandatory Demonstration Status</h2>
+            <div class="demo-box">
+                <p><strong>Deployment Phase:</strong> <span class="highlight">Version {{APP_VERSION}} Deployment Active</span></p>
+                <p>To demonstrate a live automated update (Step 12): Change <code>version</code> in <code>package.json</code> and heading to <code>v2.0.0</code>, push to GitHub, and watch Jenkins re-deploy with zero downtime!</p>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <p>Cloud Computing & DevOps CCA 2 Practical Project &bull; Fully Automated Pipeline</p>
+        </footer>
+    </div>
+
+    <script>
+        async function fetchHealth() {
+            const statusText = document.getElementById('health-status-text');
+            const jsonDisplay = document.getElementById('health-json');
+            try {
+                const res = await fetch('/health');
+                const data = await res.json();
+                statusText.innerText = 'Service Status: ' + data.status + ' | Version: ' + data.version;
+                jsonDisplay.innerText = JSON.stringify(data, null, 2);
+            } catch (err) {
+                statusText.innerText = 'Error checking health status';
+                jsonDisplay.innerText = err.message;
+            }
+        }
+        fetchHealth();
+    </script>
+</body>
+</html>

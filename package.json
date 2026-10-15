@@ -1,0 +1,21 @@
+{
+  "name": "academic-devops-portfolio",
+  "version": "1.0.0",
+  "description": "Academic Portfolio and DevOps CI/CD Demonstration Web Application",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "test": "node --test test/app.test.js"
+  },
+  "keywords": [
+    "devops",
+    "cicd",
+    "jenkins",
+    "docker",
+    "kubernetes",
+    "minikube",
+    "cca2"
+  ],
+  "author": "Rudransh (CCA-2 Student)",
+  "license": "MIT"
+}
