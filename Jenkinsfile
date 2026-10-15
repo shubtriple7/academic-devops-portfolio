@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     parameters {
-        string(name: 'DOCKER_REPO', defaultValue: 'rudranshdevops/academic-portfolio', description: 'Docker Hub repository name (format: username/repository)')
+        string(name: 'DOCKER_REPO', defaultValue: 'shub1818/academic-portfolio', description: 'Docker Hub repository name (format: username/repository)')
         string(name: 'K8S_NAMESPACE', defaultValue: 'default', description: 'Target Kubernetes namespace')
     }
 

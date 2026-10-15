@@ -16,6 +16,10 @@
     "minikube",
     "cca2"
   ],
-  "author": "Rudransh (CCA-2 Student)",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/shubtriple7/academic-devops-portfolio.git"
+  },
+  "author": "Shubham Kathavale (CCA-2 Student)",
   "license": "MIT"
 }

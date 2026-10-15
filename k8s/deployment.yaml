@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
       - name: portfolio
-        image: rudranshdevops/academic-portfolio:1.0
+        image: shub1818/academic-portfolio:1.0
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 3000

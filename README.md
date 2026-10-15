@@ -140,7 +140,7 @@ d:\shub
 2. In Pipeline definition:
    - Select: **Pipeline script from SCM**
    - SCM: **Git**
-   - Repository URL: `https://github.com/<your-username>/academic-devops-portfolio.git`
+   - Repository URL: `https://github.com/shubtriple7/academic-devops-portfolio.git`
    - Branch: `*/main`
    - Script Path: `Jenkinsfile`
 3. Click **Save** and trigger **Build Now**.
