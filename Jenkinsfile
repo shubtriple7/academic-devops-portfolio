@@ -90,6 +90,9 @@ pipeline {
                 echo "Cluster: Minikube"
                 echo "=========================================="
                 sh """
+                    if [ -f /var/jenkins_home/k8s-kubeconfig ]; then
+                        export KUBECONFIG=/var/jenkins_home/k8s-kubeconfig
+                    fi
                     echo "[INFO] Applying Kubernetes manifests..."
                     kubectl apply -f k8s/service.yaml -n ${params.K8S_NAMESPACE}
                     
@@ -110,6 +113,9 @@ pipeline {
                 echo "Stage 6: Verifying Deployment, Pods & Smoke Testing"
                 echo "=========================================="
                 sh """
+                    if [ -f /var/jenkins_home/k8s-kubeconfig ]; then
+                        export KUBECONFIG=/var/jenkins_home/k8s-kubeconfig
+                    fi
                     echo "--- Pod Status ---"
                     kubectl get pods -l app=academic-portfolio -n ${params.K8S_NAMESPACE} -o wide
                     
@@ -120,8 +126,7 @@ pipeline {
                     kubectl get deployment academic-portfolio -n ${params.K8S_NAMESPACE}
                     
                     echo "--- Application-Level HTTP Smoke Test ---"
-                    # Get Minikube IP or cluster internal IP for health check
-                    MINIKUBE_IP=\$(minikube ip 2>/dev/null || echo "127.0.0.1")
+                    MINIKUBE_IP="192.168.49.2"
                     NODE_PORT=\$(kubectl get svc academic-portfolio-service -n ${params.K8S_NAMESPACE} -o jsonpath='{.spec.ports[0].nodePort}')
                     
                     echo "[INFO] Probing http://\${MINIKUBE_IP}:\${NODE_PORT}/health ..."
@@ -148,6 +153,9 @@ pipeline {
         failure {
             echo "FAILURE: Pipeline encountered an error. Gathering diagnostics..."
             sh """
+                if [ -f /var/jenkins_home/k8s-kubeconfig ]; then
+                    export KUBECONFIG=/var/jenkins_home/k8s-kubeconfig
+                fi
                 echo "--- Recent Pod Logs ---"
                 kubectl logs -l app=academic-portfolio -n ${params.K8S_NAMESPACE} --tail=30 || true
                 echo "--- Pod Events ---"
